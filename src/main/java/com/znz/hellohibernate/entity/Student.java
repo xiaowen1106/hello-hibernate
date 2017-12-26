@@ -3,11 +3,14 @@ package com.znz.hellohibernate.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.BatchSize;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +34,8 @@ public class Student {
 	@Getter
 	private String enrollmentId;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@BatchSize(size = 4)
 	@JoinColumn(name = "guide_id")
 	@Setter
 	@Getter
